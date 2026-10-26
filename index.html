@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jiewlek & Co.</title>
+<style>
+body{margin:0;font-family:Arial;background:#fff8fa;color:#503b45}
+header{text-align:center;background:#f6dce6;padding:30px 10px}
+h1{color:#a65075;margin:0}
+nav{display:flex;gap:8px;padding:15px;overflow:auto}
+button{border:0;border-radius:20px;padding:12px;background:#eeb8cb;cursor:pointer}
+nav button{white-space:nowrap}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+.card{background:white;padding:12px;border-radius:15px;text-align:center}
+.pic{background:#ffedf3;padding:30px;font-size:45px;border-radius:12px}
+.price{color:#a65075;font-weight:bold}
+.cart{position:fixed;bottom:15px;right:15px;background:#a65075;color:white}
+dialog{border:0;border-radius:18px;width:85%;max-width:400px}
+input,textarea{width:95%;padding:10px;margin:7px 0}
+</style>
+</head>
+<body>
+<header>
+<h1>🎀 Jiewlek & Co.</h1>
+<p>Little things, lovely moments ♡</p>
+</header>
+<nav id="cats"></nav>
+<h2 style="padding:12px">สินค้าของเรา 🛍️</h2>
+<div class="grid" id="shop"></div>
+<button class="cart" onclick="showCart()">🛒 ตะกร้า <span id="num">0</span></button>
+<dialog id="box">
+<h2>ตะกร้าสินค้า</h2>
+<div id="items"></div>
+<h3 id="total"></h3>
+<button onclick="box.close()">ปิด</button>
+<button onclick="checkout()">สั่งซื้อ</button>
+</dialog>
+<dialog id="formBox">
+<h2>ข้อมูลจัดส่ง 💗</h2>
+<form id="form">
+<input id="customer" placeholder="ชื่อผู้รับ" required>
+<input id="phone" placeholder="เบอร์โทรศัพท์" required>
+<textarea id="address" placeholder="ที่อยู่จัดส่ง" required></textarea>
+<button type="submit">สรุปออเดอร์</button>
+</form>
+<button onclick="formBox.close()">ปิด</button>
+</dialog>
+<script>
+const products=[
+{id:1,n:"กระเป๋าน่ารัก",p:199,c:"กระเป๋า",e:"👜"},
+{id:2,n:"พวงกุญแจ",p:59,c:"ของจุกจิก",e:"🎀"},
+{id:3,n:"ตุ๊กตา",p:159,c:"ตุ๊กตา",e:"🧸"},
+{id:4,n:"เครื่องประดับ",p:89,c:"เครื่องประดับ",e:"💍"}
+];
+let cart=[],cat="ทั้งหมด";
+const box=document.getElementById("box");
+const formBox=document.getElementById("formBox");
+function render(){
+let cats=["ทั้งหมด",...new Set(products.map(x=>x.c))];
+document.getElementById("cats").innerHTML=cats.map((c,i)=>
+`<button onclick="filter(${i})">${c}</button>`).join("");
+document.getElementById("shop").innerHTML=products
+.filter(x=>cat==="ทั้งหมด"||x.c===cat)
+.map(x=>`<div class="card">
+<div class="pic">${x.e}</div>
+<h3>${x.n}</h3>
+<p class="price">${x.p} บาท</p>
+<button onclick="add(${x.id})">เพิ่มลงตะกร้า</button>
+</div>`).join("");
+}
+function filter(i){
+cat=["ทั้งหมด",...new Set(products.map(x=>x.c))][i];
+render();
+}
+function add(id){
+cart.push(id);
+document.getElementById("num").textContent=cart.length;
+}
+function showCart(){
+document.getElementById("items").innerHTML=cart.length?
+cart.map((id,i)=>{
+let p=products.find(x=>x.id===id);
+return `<p>${p.n} ${p.p} บาท
+<button onclick="remove(${i})">ลบ</button></p>`;
+}).join(""):"ยังไม่มีสินค้า";
+document.getElementById("total").textContent=
+"รวม "+cart.reduce((s,id)=>s+products.find(x=>x.id===id).p,0)+" บาท";
+box.showModal();
+}
+function remove(i){
+cart.splice(i,1);
+document.getElementById("num").textContent=cart.length;
+showCart();
+}
+function checkout(){
+if(!cart.length){alert("กรุณาเลือกสินค้าก่อน");return}
+box.close();
+formBox.showModal();
+}
+document.getElementById("form").onsubmit=e=>{
+e.preventDefault();
+let summary="Jiewlek & Co.\n"+
+cart.map(id=>{
+let p=products.find(x=>x.id===id);
+return p.n+" "+p.p+" บาท";
+}).join("\n")+
+"\nชื่อ: "+document.getElementById("customer").value+
+"\nโทร: "+document.getElementById("phone").value+
+"\nที่อยู่: "+document.getElementById("address").value;
+prompt("คัดลอกออเดอร์นี้เพื่อส่งให้ร้าน",summary);
+};
+render();
+</script>
+</body>
+</html>
