@@ -1,115 +1,141 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jiewlek & Co.</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jiewlek & Co. | Little World Storybook</title>
 <style>
-body{margin:0;font-family:Arial;background:#fff8fa;color:#503b45}
-header{text-align:center;background:#f6dce6;padding:30px 10px}
-h1{color:#a65075;margin:0}
-nav{display:flex;gap:8px;padding:15px;overflow:auto}
-button{border:0;border-radius:20px;padding:12px;background:#eeb8cb;cursor:pointer}
-nav button{white-space:nowrap}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
-.card{background:white;padding:12px;border-radius:15px;text-align:center}
-.pic{background:#ffedf3;padding:30px;font-size:45px;border-radius:12px}
-.price{color:#a65075;font-weight:bold}
-.cart{position:fixed;bottom:15px;right:15px;background:#a65075;color:white}
-dialog{border:0;border-radius:18px;width:85%;max-width:400px}
-input,textarea{width:95%;padding:10px;margin:7px 0}
+*{box-sizing:border-box}
+body{margin:0;background:#faf8ec;color:#365c47;font-family:Tahoma,Arial,sans-serif}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.top{background:#416d57;color:#fff;text-align:center;padding:11px;font-size:12px;letter-spacing:1px}
+header{background:#fffdf4;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:3px solid #e2e9d6}
+.logo{font-family:Georgia,serif;font-size:29px;font-weight:bold}
+.logo span{color:#c78c86}
+.small{font-size:11px;color:#849781;margin-top:5px}
+.btn{border:0;background:#416d57;color:white;border-radius:30px;padding:12px 17px}
+main{max-width:1000px;margin:auto;padding:20px}
+.hero{position:relative;overflow:hidden;border:6px solid #fffdf5;border-radius:48px;background:linear-gradient(130deg,#edf1d8,#d7e8d9);padding:35px 24px;min-height:490px;box-shadow:0 13px #e2e9d6}
+.chapter{font-family:Georgia,serif;letter-spacing:3px;color:#7c9980;font-weight:bold}
+.tag{display:inline-block;background:#fffaf0;color:#bf8580;padding:12px 18px;border-radius:30px;margin-top:20px}
+h1{font-size:clamp(35px,8vw,65px);line-height:1.25;margin:24px 0}
+h1 em{color:#bf8580}
+.hero p{line-height:1.9;color:#65806b}
+.ship{display:inline-block;background:#fffaf0;border:2px solid #f2e6cd;border-radius:30px;padding:12px 16px;margin-top:10px}
+.house{text-align:right;font-size:100px;margin-top:25px}
+.notice{background:#fff9e9;border:2px dashed #e9d9ac;border-radius:25px;padding:20px;margin-top:24px;color:#88774f;line-height:1.8}
+h2{font-family:Georgia,serif;margin-top:45px}
+.cats{display:flex;gap:10px;overflow:auto;padding:10px 0}
+.cats button{white-space:nowrap;border:1px solid #d7e2d1;background:#fffdf5;color:#416d57;border-radius:25px;padding:12px}
+.cats button.active{background:#416d57;color:white}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.card{background:#fffdf8;border-radius:22px;padding:13px;text-align:center;box-shadow:0 3px 12px #d9dfd055}
+.pic{background:#edf1e4;border-radius:17px;padding:25px 5px;font-size:65px}
+.card h3{font-size:16px;min-height:40px}
+.price{color:#b77c7e;font-weight:bold;font-size:19px}
+.card button{background:#416d57;color:white;border:0;border-radius:25px;padding:11px;margin:12px 0;width:100%}
+.cart{position:fixed;bottom:18px;right:16px;background:#416d57;color:white;border:0;border-radius:30px;padding:16px;box-shadow:0 5px 20px #0003;z-index:5}
+dialog{border:0;border-radius:23px;width:92%;max-width:450px;max-height:85vh;overflow:auto;padding:23px;color:#365c47}
+dialog::backdrop{background:#0008}
+.line{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid #ddd}
+.line button{border:0;border-radius:9px;padding:7px 12px;background:#e5eddf}
+input,textarea{width:100%;padding:12px;border:1px solid #cad8c9;border-radius:12px;margin:7px 0}
+textarea{min-height:75px}
+.full{width:100%;margin-top:10px}
+footer{text-align:center;padding:50px 15px;color:#809780;font-size:12px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.hero{padding:55px}}
 </style>
 </head>
 <body>
+<div class="top">✦ LITTLE THINGS, LOTS OF LOVE ✦ ยินดีต้อนรับสู่โลกใบเล็กของเจ้าเหมียว</div>
 <header>
-<h1>🎀 Jiewlek & Co.</h1>
-<p>Little things, lovely moments ♡</p>
+<div>
+<div class="logo">🐈 Jiewlek <span>&</span> Co.</div>
+<div class="small">THE LITTLE CAT PANTRY · ร้านของโปรดเจ้าเหมียว</div>
+</div>
+<button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">⌂ เดินเล่นในร้าน</button>
 </header>
-<nav id="cats"></nav>
-<h2 style="padding:12px">สินค้าของเรา 🛍️</h2>
+<main>
+<section class="hero">
+<div class="chapter">CHAPTER 01 / WELCOME HOME 🌼</div>
+<div class="tag">✻ เปิดประตูสู่โลกของเจ้าเหมียว ✻</div>
+<h1>ของอร่อยใน<br><em>โลกใบเล็ก</em>ของเรา</h1>
+<p>คัดสรรของโปรดทีละชิ้น ด้วยความรักที่มีให้ทุกอุ้งเท้า</p>
+<div class="ship">🎀 ส่งความสุขถึงบ้าน · ค่าส่งเหมา <b>49 บาท</b></div>
+<div class="house">🏡🐈🌷</div>
+<div class="small">JIEWLEK'S LITTLE WORLD · EST. WITH LOVE ♡</div>
+</section>
+<div class="notice">🌱 แคตตาล็อกตัวอย่าง — ยังไม่เปิดรับคำสั่งซื้อหรือชำระเงินผ่านเว็บไซต์</div>
+<section id="products">
+<h2>🌼 เดินเล่นเลือกของน่ารัก</h2>
+<div class="cats" id="cats"></div>
 <div class="grid" id="shop"></div>
-<button class="cart" onclick="showCart()">🛒 ตะกร้า <span id="num">0</span></button>
-<dialog id="box">
-<h2>ตะกร้าสินค้า</h2>
+</section>
+</main>
+<button class="cart" onclick="openCart()">🛒 ตะกร้า <span id="count">0</span></button>
+<dialog id="cartBox">
+<h2>🛒 ตะกร้าของเจ้าเหมียว</h2>
 <div id="items"></div>
+<p>ค่าจัดส่งเหมา 49 บาท</p>
 <h3 id="total"></h3>
-<button onclick="box.close()">ปิด</button>
-<button onclick="checkout()">สั่งซื้อ</button>
+<button class="btn full" onclick="openOrder()">กรอกข้อมูลออเดอร์</button>
+<button class="btn full" onclick="cartBox.close()">กลับไปเลือกสินค้า</button>
 </dialog>
-<dialog id="formBox">
-<h2>ข้อมูลจัดส่ง 💗</h2>
-<form id="form">
-<input id="customer" placeholder="ชื่อผู้รับ" required>
-<input id="phone" placeholder="เบอร์โทรศัพท์" required>
-<textarea id="address" placeholder="ที่อยู่จัดส่ง" required></textarea>
-<button type="submit">สรุปออเดอร์</button>
-</form>
-<button onclick="formBox.close()">ปิด</button>
+<dialog id="orderBox">
+<h2>🎀 รายละเอียดออเดอร์</h2>
+<p>ตัวอย่างแบบฟอร์ม ยังไม่ส่งคำสั่งซื้ออัตโนมัติ</p>
+<input id="customer" placeholder="ชื่อผู้รับ">
+<input id="phone" type="tel" placeholder="เบอร์โทรศัพท์">
+<textarea id="address" placeholder="ที่อยู่จัดส่ง"></textarea>
+<button class="btn full" onclick="copyOrder()">คัดลอกออเดอร์เพื่อส่งให้ร้าน</button>
+<button class="btn full" onclick="orderBox.close()">ปิด</button>
 </dialog>
+<footer>Jiewlek & Co. ♡ Little things, lots of love</footer>
 <script>
 const products=[
 {id:1,n:"กระเป๋าน่ารัก",p:199,c:"กระเป๋า",e:"👜"},
-{id:2,n:"พวงกุญแจ",p:59,c:"ของจุกจิก",e:"🎀"},
-{id:3,n:"ตุ๊กตา",p:159,c:"ตุ๊กตา",e:"🧸"},
-{id:4,n:"เครื่องประดับ",p:89,c:"เครื่องประดับ",e:"💍"}
+{id:2,n:"พวงกุญแจโบว์",p:59,c:"เครื่องประดับ",e:"🎀"},
+{id:3,n:"ตุ๊กตาหมี",p:159,c:"ตุ๊กตา",e:"🧸"},
+{id:4,n:"แหวนวิ้งวับ",p:89,c:"เครื่องประดับ",e:"💍"},
+{id:5,n:"กระเป๋าใบจิ๋ว",p:129,c:"กระเป๋า",e:"👛"},
+{id:6,n:"ตุ๊กตากระต่าย",p:179,c:"ตุ๊กตา",e:"🐰"}
 ];
-let cart=[],cat="ทั้งหมด";
-const box=document.getElementById("box");
-const formBox=document.getElementById("formBox");
+let cart=[];
+let category="ทั้งหมด";
+const cats=document.getElementById("cats");
+const shop=document.getElementById("shop");
+const cartBox=document.getElementById("cartBox");
+const orderBox=document.getElementById("orderBox");
 function render(){
-let cats=["ทั้งหมด",...new Set(products.map(x=>x.c))];
-document.getElementById("cats").innerHTML=cats.map((c,i)=>
-`<button onclick="filter(${i})">${c}</button>`).join("");
-document.getElementById("shop").innerHTML=products
-.filter(x=>cat==="ทั้งหมด"||x.c===cat)
-.map(x=>`<div class="card">
-<div class="pic">${x.e}</div>
-<h3>${x.n}</h3>
-<p class="price">${x.p} บาท</p>
-<button onclick="add(${x.id})">เพิ่มลงตะกร้า</button>
-</div>`).join("");
+const categories=["ทั้งหมด",...new Set(products.map(x=>x.c))];
+cats.innerHTML=categories.map(c=>`<button class="${category===c?'active':''}" onclick="filter('${c}')">${c}</button>`).join("");
+shop.innerHTML=products.filter(x=>category==="ทั้งหมด"||x.c===category).map(x=>`<div class="card"><div class="pic">${x.e}</div><h3>${x.n}</h3><div class="price">${x.p} บาท</div><button onclick="add(${x.id})">เพิ่มลงตะกร้า ♡</button></div>`).join("");
+document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.q,0);
 }
-function filter(i){
-cat=["ทั้งหมด",...new Set(products.map(x=>x.c))][i];
-render();
+function filter(c){category=c;render()}
+function add(id){let x=cart.find(x=>x.id===id);if(x)x.q++;else cart.push({id,q:1});render()}
+function change(id,d){let x=cart.find(x=>x.id===id);if(x)x.q+=d;cart=cart.filter(x=>x.q>0);render();openCart()}
+function subtotal(){return cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).p*x.q,0)}
+function openCart(){
+document.getElementById("items").innerHTML=cart.length?cart.map(x=>{
+let p=products.find(p=>p.id===x.id);
+return `<div class="line"><span>${p.e} ${p.n}<br>${p.p*x.q} บาท</span><span><button onclick="change(${x.id},-1)">−</button> ${x.q} <button onclick="change(${x.id},1)">+</button></span></div>`;
+}).join(""):"ยังไม่มีสินค้าในตะกร้า";
+document.getElementById("total").textContent="รวม "+(cart.length?subtotal()+49:0)+" บาท";
+if(!cartBox.open)cartBox.showModal();
 }
-function add(id){
-cart.push(id);
-document.getElementById("num").textContent=cart.length;
+function openOrder(){if(!cart.length){alert("กรุณาเลือกสินค้าก่อนค่ะ");return}cartBox.close();orderBox.showModal()}
+async function copyOrder(){
+let name=document.getElementById("customer").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let address=document.getElementById("address").value.trim();
+if(!name||!phone||!address){alert("กรุณากรอกข้อมูลให้ครบค่ะ");return}
+let lines=cart.map(x=>{let p=products.find(p=>p.id===x.id);return `${p.n} x${x.q} = ${p.p*x.q} บาท`}).join("\n");
+let summary=`Jiewlek & Co.\n${lines}\nค่าส่ง 49 บาท\nรวม ${subtotal()+49} บาท\nชื่อ: ${name}\nโทร: ${phone}\nที่อยู่: ${address}`;
+try{await navigator.clipboard.writeText(summary);alert("คัดลอกแล้วค่ะ กรุณานำข้อความไปส่งให้ร้านด้วยตัวเอง")}catch(e){prompt("คัดลอกข้อความนี้เพื่อส่งให้ร้าน",summary)}
 }
-function showCart(){
-document.getElementById("items").innerHTML=cart.length?
-cart.map((id,i)=>{
-let p=products.find(x=>x.id===id);
-return `<p>${p.n} ${p.p} บาท
-<button onclick="remove(${i})">ลบ</button></p>`;
-}).join(""):"ยังไม่มีสินค้า";
-document.getElementById("total").textContent=
-"รวม "+cart.reduce((s,id)=>s+products.find(x=>x.id===id).p,0)+" บาท";
-box.showModal();
-}
-function remove(i){
-cart.splice(i,1);
-document.getElementById("num").textContent=cart.length;
-showCart();
-}
-function checkout(){
-if(!cart.length){alert("กรุณาเลือกสินค้าก่อน");return}
-box.close();
-formBox.showModal();
-}
-document.getElementById("form").onsubmit=e=>{
-e.preventDefault();
-let summary="Jiewlek & Co.\n"+
-cart.map(id=>{
-let p=products.find(x=>x.id===id);
-return p.n+" "+p.p+" บาท";
-}).join("\n")+
-"\nชื่อ: "+document.getElementById("customer").value+
-"\nโทร: "+document.getElementById("phone").value+
-"\nที่อยู่: "+document.getElementById("address").value;
-prompt("คัดลอกออเดอร์นี้เพื่อส่งให้ร้าน",summary);
-};
 render();
 </script>
 </body>
